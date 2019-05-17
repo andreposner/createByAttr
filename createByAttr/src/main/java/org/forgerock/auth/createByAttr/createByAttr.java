@@ -60,12 +60,13 @@
             @Attribute(order = 100) default String sharedStateVar() {
                 return "restrictedID";
             }
-            @Attribute(order = 300) default String passwordAttribute() {
+            @Attribute(order = 200) default String passwordAttribute() {
               return "userPassword";
             }
             @Attribute(order = 300) default String defaultPwd() {
                 return "ITZBund!123";
             }
+            @Attribute(order = 400) default String storingAttribute() { return "emplyoeeNumber"; }
         }
 
 
@@ -97,23 +98,25 @@
             debugmessage("[" + DEBUG_FILE + "]: Will create user with BaseDN: '" + coreWrapper.convertRealmPathToRealmDn(context.sharedState.get(REALM).asString()) + "'.");
             debugmessage("[" + DEBUG_FILE + "]: and id: '" + attrValue + "'.");
 
-            // String idattr = "userPassword";
             debugmessage("[" + DEBUG_FILE + "]: and '" + config.passwordAttribute() + "' set to '" + config.defaultPwd() + "'.");
-            debugmessage("[" + DEBUG_FILE + "]: and '" + config.passwordAttribute() + "' set to '" + config.defaultPwd() + "'.");
+            debugmessage("[" + DEBUG_FILE + "]: and value of '" + config.sharedStateVar() + "' will be written to '" + config.storingAttribute() + "' in user's profile.");
 
-            Set<String> attrValues = new HashSet<>();
-            attrValues.add(config.defaultPwd());
+            Set<String> pwdValue = new HashSet<>();
+            pwdValue.add(config.defaultPwd());
+
+            Set<String> pseudonymValue = new HashSet<>();
+            pseudonymValue.add(attrValue);
 
             Map<String, Set> attrMap = new HashMap<>();
-            attrMap.put(config.passwordAttribute(), attrValues);
+            attrMap.put(config.passwordAttribute(), pwdValue);
+            attrMap.put(config.storingAttribute(), pseudonymValue);
 
             AMIdentityRepository idrepo = coreWrapper.getAMIdentityRepository(
                     coreWrapper.convertRealmPathToRealmDn(context.sharedState.get(REALM).asString()));
-
             try {
                 AMIdentity id = idrepo.createIdentity(IdType.USER, attrValue, attrMap);
-                // context.sharedState.put(USER_GOTO_PARAM_KEY, config.redirectURL());
-
+                debugmessage("[" + DEBUG_FILE + "]: User successfully created.");
+                // context.sharedState.put(USER_GOTO_PARAM_KEY, "http://www.google.de");
                 return goTo(true).build();
             } catch (IdRepoException e) {
             e.printStackTrace();
