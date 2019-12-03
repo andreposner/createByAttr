@@ -15,14 +15,14 @@
 -->
 # createByAttr
 
-A simple authentication node for ForgeRock's [Identity Platform][forgerock_platform] 5.5 and above. This node... **SHORT DESCRIPTION HERE**
-
+A simple authentication node for ForgeRock's [Identity Platform][forgerock_platform] 5.5 and above. This node creates a user-profile on-the-fly based on the value of the configured shared-state variable (as uid).
 
 Copy the .jar file from the ../target directory into the ../web-container/webapps/openam/WEB-INF/lib directory where AM is deployed.  Restart the web container to pick up the new node.  The node will then appear in the authentication trees components palette.
 
 
-**USAGE HERE**
+**USAGE**
 
+The node is intended to be used in case where an external authentication (e.g. via nPA, Verimi, ....) was successful but the user does not have a local profile (similiar to extisting ootb-functinality for SAML).  
 
 The code in this repository has binary dependencies that live in the ForgeRock maven repository. Maven can be configured to authenticate to this repository by following the following [ForgeRock Knowledge Base Article](https://backstage.forgerock.com/knowledge/kb/article/a74096897).
 
