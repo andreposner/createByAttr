@@ -26,9 +26,7 @@ The node is intended to be used in case where an external authentication (e.g. v
 
 The code in this repository has binary dependencies that live in the ForgeRock maven repository. Maven can be configured to authenticate to this repository by following the following [ForgeRock Knowledge Base Article](https://backstage.forgerock.com/knowledge/kb/article/a74096897).
 
-**SPECIFIC BUILD INSTRUCTIONS HERE**
-
-**SCREENSHOTS ARE GOOD LIKE BELOW**
+**SCREENSHOTS**
 
 ![ScreenShot](./example.png)
 
